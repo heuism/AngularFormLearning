@@ -1,13 +1,11 @@
-.container {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  // min-height: 100vh;
-}
-
 label {
   color: #444;
   font-weight: lighter;
   font-size: 2.5rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div>
   <form>
     <!-- <div class="form-group">
     <label for="name">Company name</label>
@@ -13,6 +13,7 @@
         <input
           type="text"
           class="form-control"
+          formControlName="companyName"
           id="name"
           required
         />
@@ -25,6 +26,7 @@
           type="tel"
           class="form-control"
           id="phone"
+          formControlName="companyNumber"
           required
         />
       </div>
@@ -36,8 +38,46 @@
           type="text"
           class="form-control"
           id="address"
+          formControlName="companyAddress"
           required
         />
+      </div>
+    </div>
+    <div class="button-container">
+      <button type="button" (click)="addNewEmployee()">Add Employee +</button>
+      <button (click)="saveForm()">Save</button>
+    </div>
+    <div *ngIf="employees.length">
+      <div *ngFor="let employee of employees">
+        <div class="form-group row">
+          <label for="name" class="col-lg-3 col-6">Employee name</label>
+          <div class="col-lg-3 col-6">
+            <input type="text" class="form-control" id="name" required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="startDate" class="col-lg-3 col-6">Start Date</label>
+          <div class="col-lg-3 col-6">
+            <input type="date" class="form-control" id="startDate" #startDate />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="endDate" class="col-lg-3 col-6">End Date</label>
+          <div class="col-lg-3 col-6">
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              [required]="!!startDate.value"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="salary" class="col-lg-3 col-6">Salary</label>
+          <div class="col-lg-3 col-6">
+            <input type="text" class="form-control" id="salary" required />
+          </div>
+        </div>
       </div>
     </div>
   </form>
