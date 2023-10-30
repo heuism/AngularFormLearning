@@ -38,9 +38,12 @@ export class HomeComponent {
     );
   }
 
-  onChangeDate(event: any, index: number) {
+  onChangeStartDate(event: any, index: number) {
     console.log(event.target.value);
     // this.employeeList.value[index].fromDate = event.target.value;
+    if (new Date(event.target.value) > new Date(this.employeeList.at(index).get('toDate')?.value)) {
+      this.employeeList.at(index).get('toDate')?.setValue(null);
+    }
   }
 
   saveForm() {
