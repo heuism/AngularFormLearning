@@ -46,6 +46,10 @@ export class HomeComponent {
   saveForm() {
     console.log(this.companyForm);
   }
+
+  trackByFn(index: number, item: any) {
+    return index;
+  }
 }
 
 export interface Employee {

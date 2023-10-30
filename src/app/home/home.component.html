@@ -45,29 +45,55 @@
     </div>
     <div class="button-container">
       <button type="button" (click)="addNewEmployee()">Add Employee +</button>
-      <button (click)="saveForm()">Save</button>
+      <button type="button" (click)="saveForm()">Save</button>
     </div>
-    <div formArrayName="employees" *ngFor="let employee of employeeList.value; let i = index">
+    <div
+      formArrayName="employees"
+      *ngFor="
+        let employee of employeeList.value;
+        let i = index;
+        trackBy: trackByFn
+      "
+    >
       <ng-container [formGroupName]="i">
         <div class="form-group row">
-          <label for="name" class="col-lg-3 col-6">Employee name</label>
+          <label [for]="'employee-name' + i" class="col-lg-3 col-6"
+            >Employee name</label
+          >
           <div class="col-lg-3 col-6">
-            <input type="text" class="form-control" id="name" required formControlName="name"/>
+            <input
+              type="text"
+              class="form-control"
+              [id]="'employee-name' + i"
+              required
+              formControlName="name"
+            />
           </div>
         </div>
         <div class="form-group row">
-          <label for="startDate" class="col-lg-3 col-6">Start Date</label>
-          <div class="col-lg-3 col-6">
-            <input type="date" class="form-control" id="startDate" #startDate (change)="onChangeDate($event, i)" formControlName="fromDate"/>
-          </div>
-        </div>
-        <div class="form-group row" *ngIf="!!startDate.value">
-          <label for="endDate" class="col-lg-3 col-6">End Date</label>
+          <label [for]="'employee-startDate' + i" class="col-lg-3 col-6"
+            >Start Date</label
+          >
           <div class="col-lg-3 col-6">
             <input
               type="date"
               class="form-control"
-              id="endDate"
+              [id]="'employee-startDate' + i"
+              #startDate
+              (change)="onChangeDate($event, i)"
+              formControlName="fromDate"
+            />
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="!!startDate.value">
+          <label [for]="'employee-endDate' + i" class="col-lg-3 col-6"
+            >End Date</label
+          >
+          <div class="col-lg-3 col-6">
+            <input
+              type="date"
+              class="form-control"
+              [id]="'employee-endDate' + i"
               formControlName="toDate"
               [required]="!!startDate.value"
               [min]="startDate.value"
@@ -75,9 +101,16 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="occupation" class="col-lg-3 col-6">Occupation</label>
+          <label [for]="'employee-occupation' + i" class="col-lg-3 col-6"
+            >Occupation</label
+          >
           <div class="col-lg-3 col-6">
-            <select class="form-control" id="occupation" formControlName="occupation" required>
+            <select
+              class="form-control"
+              [id]="'employee-occupation' + i"
+              formControlName="occupation"
+              required
+            >
               <option value="SE">Software Engineer</option>
               <option value="CEO">CEO</option>
               <option value="TL">Tech Lead</option>
@@ -85,9 +118,17 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="salary" class="col-lg-3 col-6">Salary</label>
+          <label [for]="'employee-salary' + i" class="col-lg-3 col-6"
+            >Salary</label
+          >
           <div class="col-lg-3 col-6">
-            <input type="text" class="form-control" id="salary" required formControlName="salary"/>
+            <input
+              type="text"
+              class="form-control"
+              [id]="'employee-salary' + i"
+              required
+              formControlName="salary"
+            />
           </div>
         </div>
       </ng-container>
