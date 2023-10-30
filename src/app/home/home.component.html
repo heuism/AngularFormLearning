@@ -1,5 +1,5 @@
 <div>
-  <form>
+  <form [formGroup]="companyForm">
     <!-- <div class="form-group">
     <label for="name">Company name</label>
     <input type="text" class="form-control" id="name" required />
@@ -47,7 +47,52 @@
       <button type="button" (click)="addNewEmployee()">Add Employee +</button>
       <button (click)="saveForm()">Save</button>
     </div>
-    <div *ngIf="employees.length">
+    <div formArrayName="employees" *ngFor="let employee of employeeList.value; let i = index">
+      <ng-container [formGroupName]="i">
+        <div class="form-group row">
+          <label for="name" class="col-lg-3 col-6">Employee name</label>
+          <div class="col-lg-3 col-6">
+            <input type="text" class="form-control" id="name" required formControlName="name"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="startDate" class="col-lg-3 col-6">Start Date</label>
+          <div class="col-lg-3 col-6">
+            <input type="date" class="form-control" id="startDate" #startDate (change)="onChangeDate($event, i)" formControlName="fromDate"/>
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="!!startDate.value">
+          <label for="endDate" class="col-lg-3 col-6">End Date</label>
+          <div class="col-lg-3 col-6">
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              formControlName="toDate"
+              [required]="!!startDate.value"
+              [min]="startDate.value"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="occupation" class="col-lg-3 col-6">Occupation</label>
+          <div class="col-lg-3 col-6">
+            <select class="form-control" id="occupation" formControlName="occupation" required>
+              <option value="SE">Software Engineer</option>
+              <option value="CEO">CEO</option>
+              <option value="TL">Tech Lead</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="salary" class="col-lg-3 col-6">Salary</label>
+          <div class="col-lg-3 col-6">
+            <input type="text" class="form-control" id="salary" required formControlName="salary"/>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <!-- <div *ngIf="employees.length">
       <div *ngFor="let employee of employees">
         <div class="form-group row">
           <label for="name" class="col-lg-3 col-6">Employee name</label>
@@ -58,10 +103,10 @@
         <div class="form-group row">
           <label for="startDate" class="col-lg-3 col-6">Start Date</label>
           <div class="col-lg-3 col-6">
-            <input type="date" class="form-control" id="startDate" #startDate />
+            <input type="date" class="form-control" id="startDate" #startDate (change)="onChangeDate()"/>
           </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" *ngIf="!!startDate.value">
           <label for="endDate" class="col-lg-3 col-6">End Date</label>
           <div class="col-lg-3 col-6">
             <input
@@ -80,6 +125,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </form>
 </div>
